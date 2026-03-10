@@ -23,8 +23,19 @@ pipeline{
         stage('Test & coverage') {
             steps {
                 sh '''
-                    mvn test jacoco:report
+                    mvn clean test jacoco:report
                 '''
+            }
+
+            post {
+                always {
+                    jacoco(
+                        execPattern: 'target/jacoco.exec',
+                        classPattern: 'target/classes',
+                        sourcePattern: 'src/main/java',
+                        exclusionPattern: ''
+                    )
+                }
             }
         }
 
