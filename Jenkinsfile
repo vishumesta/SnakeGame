@@ -68,5 +68,12 @@ pipeline{
             }
         }
 
+        stage('packaging') {
+            steps {
+                    sh 'mvn clean package'
+                }
+            }
+        }
+
     }
 }
