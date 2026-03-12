@@ -41,10 +41,12 @@ pipeline{
 
         stage('SonarQube'){
             steps{
-                mvn sonar:sonar \
-                -Dsonar.projectKey=snake-game \
-                -Dsonar.host.url=http://18.237.61.251:9000 \
-                -Dsonar.login=925337beed5be219a08790270383b1becf1c2c37
+                sh '''
+                    mvn sonar:sonar \
+                    -Dsonar.projectKey=snake-game \
+                    -Dsonar.host.url=http://18.237.61.251:9000 \
+                    -Dsonar.login=925337beed5be219a08790270383b1becf1c2c37
+                '''
             }
         }
 
