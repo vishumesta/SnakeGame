@@ -68,10 +68,10 @@ pipeline{
             }
         }
 
-        stage('packaging') {
+        stage('depedency-chck/vulnarablescan'){
             steps {
-                    sh 'mvn clean package'
-                }
-            }
+                sh 'mvn org.owasp:dependency-check-maven:check -Dformat=ALL'
+             }
+        }
     }
 }
