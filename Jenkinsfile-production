@@ -73,5 +73,11 @@ pipeline{
         //         sh 'mvn org.owasp:dependency-check-maven:check -Dformat=ALL'
         //      }
         // }
+
+        stage('Base-image-scan'){
+            steps{
+                sh 'bash trivy-docker-image-scan.sh'
+            }
+        }
     }
 }
