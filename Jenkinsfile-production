@@ -5,6 +5,11 @@ pipeline{
         jdk 'java-17'
         maven 'maven'
     }
+
+    environment {
+        IMAGE_NAME = "manojkrishnappa/snake-game-devsecops:${GIT_COMMIT}"
+    }
+
     stages{
        stage('Git Checkout') {
             steps {
@@ -85,6 +90,15 @@ pipeline{
                 stage('OPA-confest rules'){
                     steps{
                         sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy dockerfile-security.rego Dockerfile'
+                    }
+                }
+
+                stage('Docker Image build'){
+                    steps{
+                        sh '''
+                            printenv
+                            docker build -t ${IMAGE_NAME} .
+                        '''
                     }
                 }
             }
