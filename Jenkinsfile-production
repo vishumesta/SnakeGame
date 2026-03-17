@@ -74,10 +74,21 @@ pipeline{
              }
         }
 
-        stage('Base-image-scan'){
-            steps{
-                sh 'bash trivy-docker-image-scan.sh'
+        stage('Base-image-scan and OPA-rules'){
+            parallel{
+                stage('Trivy base image'){
+                        steps{
+                            sh 'bash trivy-docker-image-scan.sh'
+                        }
+                }
+
+                stage('OPA-confest rules'){
+                    steps{
+                        sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy dockerfile-security.rego Dockerfile'
+                    }
+                }
             }
+
         }
     }
 }
