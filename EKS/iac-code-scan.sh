@@ -1,9 +1,9 @@
 #!/bin/bash
 
-echo "authentication with snyk"
-snyk auth "$SNYK_TOKEN"
+# echo "authentication with snyk"
+# snyk auth "$SNYK_TOKEN"
 
-echo "succesfuly authenticated..."
+# echo "succesfuly authenticated..."
 
 echo "Running snyk test"
 
