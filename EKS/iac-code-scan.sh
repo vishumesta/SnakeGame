@@ -1,15 +1,11 @@
 #!/bin/bash
+set -e
 
-# echo "authentication with snyk"
-# snyk auth "$SNYK_TOKEN"
+echo "Running Snyk IaC Scan..."
 
-# echo "succesfuly authenticated..."
-
-echo "Running snyk test"
-
-snyk snyk iac test --severity-threshold=critical || {
-    echo "Critical vulnarabilties found please check the code"
+if snyk iac test --severity-threshold=critical; then
+    echo "✅ No critical vulnerabilities found"
+else
+    echo "❌ Critical vulnerabilities detected"
     exit 1
-}
-
-echo "No critical vulnarabilties found"
+fi
