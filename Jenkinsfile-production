@@ -10,7 +10,7 @@ pipeline{
         IMAGE_NAME = "manojkrishnappa/snake-game-devsecops:${GIT_COMMIT}"
         AWS_REGION = "ap-northeast-1"
         CLSUTER_NAME = "itkannadigaru-cluster"
-
+        NAMESPACE = "itkannadigaru"
     }
 
     stages{
