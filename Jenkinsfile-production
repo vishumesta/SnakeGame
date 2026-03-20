@@ -8,6 +8,9 @@ pipeline{
 
     environment {
         IMAGE_NAME = "manojkrishnappa/snake-game-devsecops:${GIT_COMMIT}"
+        AWS_REGION = "ap-northeast-1"
+        CLSUTER_NAME = "itkannadigaru-cluster"
+
     }
 
     stages{
@@ -122,6 +125,12 @@ pipeline{
                 sh '''
                     docker push ${IMAGE_NAME}
                 '''
+            }
+        }
+
+        stage('update k8 cluster'){
+            steps{
+                sh 'aws eks update-kubeconfig --region ${AWS_REGION} --name ${CLSUTER_NAME}'
             }
         }
 
